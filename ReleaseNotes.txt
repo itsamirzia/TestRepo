@@ -27,8 +27,8 @@ NOTES:
 *
   
 BUG FIXES:
+* my new bug fix for conflict
 * New BugFix released
-* 
 * 
 *
 
@@ -37,8 +37,6 @@ KNOWN ISSUES:
 *
 *
 
-
-------------------------------------------------------------------------
 RELEASE VERSION 0.5.0
 ------------------------------------------------------------------------
 NEW FEATURES:
