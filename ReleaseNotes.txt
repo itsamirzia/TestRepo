@@ -1,0 +1,194 @@
+
+========================================================================
+TestSystem - ATS Command Interpreter
+========================================================================
+
+The ATS Command Interpreter is the core component of the ATS. It runs
+test scripts, supports multiple communication channels and stacks and
+provides test results for the test runs as a log file.
+
+
+------------------------------------------------------------------------
+RELEASE VERSION 0.5.0
+------------------------------------------------------------------------
+NEW FEATURES:
+* Factor in Addressfile can now be changed during runtime with setup-command
+* Loadpoint setup-command supports counter-gatetime
+* HLS_ID2 security mechanism now also support AES128 authentication mechanism.
+* IMS1 simulator
+* BI_Commands.xml
+* BI_LOG.xml
+* Protocol-stack: New parameter added <HLSID2algorithm>AES128</HLSID2algorithm> for DLMSAPP-layer.
+* Display setting fileNOTES:
+*
+*
+*
+  
+BUG FIXES:
+* Some DLMS-Length-Codings did not correct supporting lengths > 127
+* Trace of DLMS-application-layer
+* Parameterizing-command for DLMS-BitString and DLMS-Float
+* Increase performance for checks with wildcard
+* General ciphering
+* Exceptions from Comport should now log the portname too
+* IEC13757-Readout (rework for retries in case of timeout, and Readout_Multi got obsolete and is now eliminated)
+* IEC1107 received data could appear twice
+* Workaround for SslStream garbage data after timeout exception
+* ATS was hanging and flashing error 420 randomly while sending GPIB commands to GPIB controller.
+* ATS command 6 (External Tool) memory corruption
+* Tracing of DLMS Exception.
+* ATS was hanging and flashing error 420 randomly while sending GPIB commands to the GPIB controller.
+*
+
+KNOWN ISSUES:
+*
+*
+*
+
+------------------------------------------------------------------------
+RELEASE VERSION 0.4.0
+------------------------------------------------------------------------
+NEW FEATURES:
+* New operator for string-compare of not-equal (existed for value-compares already)
+* Crypting of DLMS-PDUs is no longer depending on the security-level
+* ABNT-Password-Handling with SHA256 supported for IEC1107 too
+* Fix-Baud for IEC1107
+* Comments for Load-Point-Files
+* Supporting Float32 within DLMS
+* Optional command-timeouts to avoid blocking actions
+* Support SSL/TLS protocol for COM-port and IP interface
+* Completation of NMS-Implementation
+
+AFFECTED XML FILES:
+* BI_Commands.xml
+* Protocol-definition of IEC1107
+* BI_Log.xml
+* Protocol-definition of counters
+* SetupHW
+* Additional settings in the NMSSimulator-Layer
+
+NOTES:
+*
+*
+*
+  
+BUG FIXES:
+* DLMS MaxPduSize can now be influenced by its setting
+* DLMS DateTime-Compare could be wrong due to daylight-savings-flag
+* DLMS PDU-decrypting for the cases of ciphering-only and authentication-only
+* DLMS HLS for ID6 and ID7
+* Catch exceptions of Close_Port-Command
+* DLMS Integer-Check for negativ values
+* DLMS Float-type supporting
+* Check integer from DLMS with negativ values
+* Using factors from DLMS-Addressfile
+* Counter-measurements timeout handling
+* Gate-Time-Measuring with counter
+* Continous-measuring with counter
+* Counter-protocol-layers
+* Parameterization-commands using value-placeholder from addressfile
+* All timings independent of the local Time/Date of PC-clock
+* Clearing of temporary buffer in HDLC causing problems after timeout
+* Increase performance of IEC1107 processing large data
+* Receive-Conditions of the HDLC-Layer now with limited max. length
+* Inter-Octet-Timeout of IP-layer not multiplied by 1000 any longer (timeout-setting is already ment to be in "ms")
+
+KNOWN ISSUES:
+*
+*
+*
+
+
+
+------------------------------------------------------------------------
+Release 0.3.1
+------------------------------------------------------------------------
+NEW FEATURES:
+* New setting in DLMS-App-Layer for automatic takeover of read
+  frame counter
+
+AFFECTED XML FILES:
+*
+
+NOTES:
+* Name of the new Setting for the frame counter is "FrameCounterName"
+  
+BUG FIXES:
+* Main-Window-Close-Button has now same functionality like the cancel
+  button
+* Watchdog and test-runtime on GUI also handled if GUI is very busy with
+  outputs
+* Setup-Setting-Command corrected for DLMS-Framecounter: hex-value was
+  not taken correctly
+* The ATS will now try a reset of the PPS400 power source if the power
+  source gets stuck in a busy loop
+* Splitters in MainWindow and ManCommandWindow redesigned
+* Icon of the CI added again
+
+KNOWN ISSUES:
+*
+
+
+
+------------------------------------------------------------------------
+Release 0.3.0
+------------------------------------------------------------------------
+NEW FEATURES:
+* Database-ID as additional and optional start-argument that gets
+  written into the logfile (support of remote startup via Sequencer/ATM)
+* DLMS General-Block-Transfer implemented; New settings in
+  protocol-stack for DLMS-APP-Layer
+* Introduction and integration of the KF2 protocol
+* Introduction of Device Simulation layer for simulating a communication
+  with a device
+* Test scripts and macros in subfolders are now supported. The CI will
+  search recursively for test script and macro files in its project
+  folder. Macros in test scripts can be used by just referring to the
+  macro name instead of the full filepath.
+* DLMS LN-Adressing, possibility switching back to default LN in
+  Adressfile
+* IEC870 Activation-Termination; New setting in protocol stack for
+  IEC870-APP-Layer
+* Default-Value from addressfile can be used for CHECK-command;
+  Also, CI now supports multiline default values in addressfiles
+* New IEC870-Commands; Renamed command "IEC870(WritePoint" to
+  "IEC870(WritePointFloat"
+* Pre-Established DLMS-Session supported; Session-Timeout needs to be
+  set to -1
+* Digital-Output hardware signals supported
+* New DLMS-Services for general global and dedicated ciphering
+* Automatic opening sequence for IEC13757 added (SetProtocol- and
+  OpenProtocol-command for IEC13757-commands are now optional)
+* UI scaling optimized (windows support resize, minimize, maximize);
+  Also, close operation for main window sets termination code
+* New setting "WaitForBusyTimeout" in PPS400Layer for detecting and
+  handling when the power source has been busy for too long
+
+AFFECTED XML FILES:
+* BI_Commands.xml
+* BI_LOG.xml
+
+NOTES:
+* 
+
+BUG FIXES:
+* Fixed PPS400 protocol-stack settings-initializing
+  (MinVoltage needs to be initialized before any voltages)
+* IEC870 Interrogation Data Processing
+* DLMS-Wrapper in combination with COMPORT did not work correctly
+* DeviceSimulator layer had missing settings for init and state
+* Float formatting in IEC870, and introducing new setting for
+  default-format for floats
+* Write on a comport need a timeout for Windows 10; New setting
+  "Transmit-Timeout" is introduced
+* IP-Connect-Handling with Retries was not working when Retries was set
+  to zero
+* Exit condition in GPIB layer fixed
+* Various bug fixes in the IEC13757 protocol stack
+* DLMS frame counter data type fixed (uint)
+* Parsing error for DLMS read command fixed
+* DLMS GBT: Handling for empty blocks implemented;
+  Appending of chars instead of bytes
+
+KNOWN ISSUES:
+* 
